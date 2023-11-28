@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const petSchema = mongoose.Schema({
   category: String,
@@ -13,6 +13,6 @@ const petSchema = mongoose.Schema({
   adopted: Boolean,
 });
 
-const pets = new mongoose.model("pets", petSchema);
+const allpets = new mongoose.model("allpets", petSchema);
 
-module.exports = pets;
+module.exports = allpets;

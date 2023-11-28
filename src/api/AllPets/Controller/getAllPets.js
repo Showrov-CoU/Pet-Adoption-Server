@@ -1,8 +1,15 @@
-const pets = require("../../../Models/Pet");
+const allpets = require("../../../Models/Pet");
 
 const getAllPets = async (req, res) => {
   try {
-    const pets = await pets.find();
+    const query = {};
+    if (req.query.category) {
+      query["category"] = req.query.category;
+      console.log(query);
+    } else {
+      console.log(query);
+    }
+    const pets = await allpets.find(query);
     res.send(pets);
   } catch (error) {
     console.log(error.message);
