@@ -5,6 +5,7 @@ const getAllDonations = require("../../api/AllDonation/Controller'/getAllDonatio
 const getSinglePet = require("../../api/GetSinglePet/GetSinglePet");
 const getSingleDonation = require("../../api/GetSingleDonation/GetSingleDonation");
 const controlAdoption = require("../../api/controlAdoption");
+const controlMyDonation = require("../../api/controlMyDonation");
 const router = express.Router();
 
 router.get("/categories", getAllCategory);
@@ -14,6 +15,7 @@ router.get("/petDetails/:id", getSinglePet);
 router.get("/donation/:id", getSingleDonation);
 
 router.post("/adoption", controlAdoption);
+router.post("/mydonation", controlMyDonation);
 // router.post("/users");
 
 module.exports = router;

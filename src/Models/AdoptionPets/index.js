@@ -2,8 +2,11 @@ const mongoose = require("mongoose");
 
 const adoptionSchema = mongoose.Schema({
   name: String,
+  userImage: String,
   petid: String,
-  emai: String,
+  petName:String,
+  image:String,
+  email: String,
   phone: String,
   address: String,
 });
