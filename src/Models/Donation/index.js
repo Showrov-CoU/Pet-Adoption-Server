@@ -2,6 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const donationSchema = mongoose.Schema({
   image: String,
+  Dname: String,
   name: String,
   category: String,
 
