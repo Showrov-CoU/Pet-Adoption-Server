@@ -4,14 +4,16 @@ const connectDB = require("./db/connection");
 
 require("dotenv").config();
 
-const categoryRoute = require("./Routes/Category/index");
+// const categoryRoute = require("./Routes/Category/index");
+const router = require("./Routes/index");
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 applyMiddleware(app);
 
-app.use(categoryRoute);
+// app.use(categoryRoute);
+app.use(router);
 
 app.get("/", (req, res) => {
   res.send("server is running");
