@@ -12,6 +12,11 @@ const deleteUser = require("../api/Dashboard/Admin/deleteUser");
 const patchUser = require("../api/Dashboard/Admin/patchUser");
 const jwt = require("jsonwebtoken");
 const allusers = require("../Models/AllUsers");
+const allpets = require("../Models/AllPet");
+const addedPet = require("../api/Dashboard/addedPet");
+const mypets = require("../api/Dashboard/mypets");
+const deletePet = require("../api/Dashboard/deletePet");
+const makeAdopt = require("../api/Dashboard/makeadopt");
 require("dotenv").config();
 
 const router = express.Router();
@@ -45,12 +50,23 @@ const verifyToken = async (req, res, next) => {
   });
 };
 
+const verifyAdmin = async (req, res) => {
+  const email = req.decoded.email;
+  const query = { email: email };
+  const user = await allusers.findOne(query);
+  const isAdmin = user?.role === "admin";
+  if (!isAdmin) {
+    return res.status(403).send({ message: "forbidden access" });
+  }
+  next();
+};
+
 router.get("/categories", getAllCategory);
 router.get("/pets", getAllPets);
 router.get("/donations", getAllDonations);
 router.get("/petDetails/:id", getSinglePet);
 router.get("/donation/:id", getSingleDonation);
-router.get("/users", verifyToken, getUsers);
+router.get("/users", verifyToken, verifyAdmin, getUsers);
 
 router.get("/users/admin/:email", verifyToken, async (req, res) => {
   const email = req.params.email;
@@ -70,12 +86,20 @@ router.get("/users/admin/:email", verifyToken, async (req, res) => {
   res.send({ admin });
 });
 
+router.get("/mypet/:email", mypets);
+
 router.post("/adoption", controlAdoption);
 router.post("/mydonation", controlMyDonation);
 router.post("/users", controlUsers);
-
-router.delete("/users/:id", deleteUser);
-
-router.patch("/users/admin/:id", patchUser);
+// dashboad request
+router.post("/addpet", addedPet);
+// delete myaddpet
+router.delete("/myPet/:id", deletePet);
+// admin delete user
+router.delete("/users/:id", verifyToken, verifyAdmin, deleteUser);
+// admin make others user to admin
+router.patch("/users/admin/:id", verifyToken, verifyAdmin, patchUser);
+// my added pet can be changed adopted status
+router.patch("/makeadopt/:id", makeAdopt);
 
 module.exports = router;

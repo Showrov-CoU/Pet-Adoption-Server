@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
-const allusers = require("../../../Models/AllUsers");
+const allpets = require("../../Models/AllPet");
 
-const patchUser = async (req, res) => {
+const makeAdopt = async (req, res) => {
   try {
     const id = req.params.id;
     // console.log(id);
@@ -9,14 +9,14 @@ const patchUser = async (req, res) => {
     // console.log(filter);
     const upDateDoc = {
       $set: {
-        role: "admin",
+        adopted: true,
       },
     };
-    const result = await allusers.updateOne(filter, upDateDoc);
+    const result = await allpets.updateOne(filter, upDateDoc);
 
     res.send(result);
   } catch (error) {
     console.log(error.message);
   }
 };
-module.exports = patchUser;
+ module.exports = makeAdopt;
