@@ -1,16 +1,15 @@
 const cors = require("cors");
 const express = require("express");
-const { LOCAL_CLIENT } = require("../config/default");
+const {
+  LOCAL_CLIENT,
+  MAIN_DEPLOY_LINK,
+  ANOTHER_LINK,
+} = require("../config/default");
 
 const applyMiddleware = (app) => {
   app.use(
     cors({
-      origin: [
-        // "http://localhost:5173/",
-        // // "http://localhost:5173/",
-        // // "http://localhost:5173/",
-        LOCAL_CLIENT,
-      ],
+      origin: ["http://localhost:5173", "https://pet-adoption-2a603.web.app"],
       credentials: true,
     })
   );

@@ -16,7 +16,7 @@ const allpets = require("../Models/AllPet");
 const addedPet = require("../api/Dashboard/addedPet");
 const mypets = require("../api/Dashboard/mypets");
 const deletePet = require("../api/Dashboard/deletePet");
-const makeAdopt = require("../api/Dashboard/makeadopt");
+const makeAdopt = require("../api/Dashboard/makeAdopt");
 const updatePet = require("../api/Dashboard/updatePet");
 const createDonate = require("../api/Dashboard/createDonate");
 const myCreatedDonation = require("../api/Dashboard/myCreatedDonation");
@@ -26,6 +26,7 @@ const myDonation = require("../api/Dashboard/myDonation");
 const removePreviousDonation = require("../api/Dashboard/removePreviousDonation");
 const myAdoption = require("../api/Dashboard/myAdoption");
 const changeAdoptRequest = require("../api/Dashboard/changeAdoptRequest");
+const pauseDonation = require("../api/Dashboard/pauseDonation");
 require("dotenv").config();
 
 const router = express.Router();
@@ -118,6 +119,7 @@ router.delete("/users/:id", verifyToken, verifyAdmin, deleteUser);
 router.patch("/users/admin/:id", verifyToken, verifyAdmin, patchUser);
 // my added pet can be changed adopted status
 router.patch("/makeadopt/:id", makeAdopt);
+router.patch("/pause/:id", pauseDonation);
 router.patch("/changeAdoptRequest/:id", changeAdoptRequest);
 // update pet
 router.patch("/updatepet/:id", updatePet);

@@ -10,5 +10,5 @@ const main = async (req, res) => {
     console.log(`Server is running on port: ${port}`);
   });
 };
-
+ 
 main();

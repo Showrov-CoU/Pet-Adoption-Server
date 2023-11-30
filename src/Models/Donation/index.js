@@ -15,6 +15,10 @@ const donationSchema = mongoose.Schema({
   LongDesc: String,
   date: String,
   time: String,
+  pause: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const donations = new mongoose.model("donations", donationSchema);
