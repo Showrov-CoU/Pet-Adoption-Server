@@ -22,6 +22,8 @@ const createDonate = require("../api/Dashboard/createDonate");
 const myCreatedDonation = require("../api/Dashboard/myCreatedDonation");
 const updateDonation = require("../api/Dashboard/updateDonation");
 const deleteDonate = require("../api/Dashboard/deleteDonate");
+const myDonation = require("../api/Dashboard/myDonation");
+const removePreviousDonation = require("../api/Dashboard/removePreviousDonation");
 require("dotenv").config();
 
 const router = express.Router();
@@ -91,19 +93,22 @@ router.get("/users/admin/:email", verifyToken, async (req, res) => {
   res.send({ admin });
 });
 
+// dashboad request.........
+
 router.get("/mypet/:email", mypets);
 router.get("/myCreatedDonationList/:email", myCreatedDonation);
+router.get("/myDonationList/:email", myDonation);
 
 router.post("/adoption", controlAdoption);
 router.post("/mydonation", controlMyDonation);
 router.post("/users", controlUsers);
-// dashboad request.........
 
 router.post("/addpet", addedPet);
 router.post("/createdonate", createDonate);
 // delete myaddpet
 router.delete("/myPet/:id", deletePet);
 router.delete("/deletedonate/:id", deleteDonate);
+router.delete("/removePreviousDonation/:id", removePreviousDonation);
 // admin delete user
 router.delete("/users/:id", verifyToken, verifyAdmin, deleteUser);
 // admin make others user to admin
