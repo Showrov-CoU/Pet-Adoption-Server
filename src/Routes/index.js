@@ -17,6 +17,7 @@ const addedPet = require("../api/Dashboard/addedPet");
 const mypets = require("../api/Dashboard/mypets");
 const deletePet = require("../api/Dashboard/deletePet");
 const makeAdopt = require("../api/Dashboard/makeadopt");
+const updatePet = require("../api/Dashboard/updatePet");
 require("dotenv").config();
 
 const router = express.Router();
@@ -50,7 +51,7 @@ const verifyToken = async (req, res, next) => {
   });
 };
 
-const verifyAdmin = async (req, res) => {
+const verifyAdmin = async (req, res, next) => {
   const email = req.decoded.email;
   const query = { email: email };
   const user = await allusers.findOne(query);
@@ -101,5 +102,7 @@ router.delete("/users/:id", verifyToken, verifyAdmin, deleteUser);
 router.patch("/users/admin/:id", verifyToken, verifyAdmin, patchUser);
 // my added pet can be changed adopted status
 router.patch("/makeadopt/:id", makeAdopt);
+// update pet
+router.patch("/updatepet/:id", updatePet);
 
 module.exports = router;
