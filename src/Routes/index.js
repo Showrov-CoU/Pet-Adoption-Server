@@ -18,6 +18,10 @@ const mypets = require("../api/Dashboard/mypets");
 const deletePet = require("../api/Dashboard/deletePet");
 const makeAdopt = require("../api/Dashboard/makeadopt");
 const updatePet = require("../api/Dashboard/updatePet");
+const createDonate = require("../api/Dashboard/createDonate");
+const myCreatedDonation = require("../api/Dashboard/myCreatedDonation");
+const updateDonation = require("../api/Dashboard/updateDonation");
+const deleteDonate = require("../api/Dashboard/deleteDonate");
 require("dotenv").config();
 
 const router = express.Router();
@@ -88,14 +92,18 @@ router.get("/users/admin/:email", verifyToken, async (req, res) => {
 });
 
 router.get("/mypet/:email", mypets);
+router.get("/myCreatedDonationList/:email", myCreatedDonation);
 
 router.post("/adoption", controlAdoption);
 router.post("/mydonation", controlMyDonation);
 router.post("/users", controlUsers);
-// dashboad request
+// dashboad request.........
+
 router.post("/addpet", addedPet);
+router.post("/createdonate", createDonate);
 // delete myaddpet
 router.delete("/myPet/:id", deletePet);
+router.delete("/deletedonate/:id", deleteDonate);
 // admin delete user
 router.delete("/users/:id", verifyToken, verifyAdmin, deleteUser);
 // admin make others user to admin
@@ -104,5 +112,7 @@ router.patch("/users/admin/:id", verifyToken, verifyAdmin, patchUser);
 router.patch("/makeadopt/:id", makeAdopt);
 // update pet
 router.patch("/updatepet/:id", updatePet);
+// update donation
+router.patch("/updatedonate/:id", updateDonation);
 
 module.exports = router;
