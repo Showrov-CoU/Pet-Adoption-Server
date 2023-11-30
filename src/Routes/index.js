@@ -24,6 +24,8 @@ const updateDonation = require("../api/Dashboard/updateDonation");
 const deleteDonate = require("../api/Dashboard/deleteDonate");
 const myDonation = require("../api/Dashboard/myDonation");
 const removePreviousDonation = require("../api/Dashboard/removePreviousDonation");
+const myAdoption = require("../api/Dashboard/myAdoption");
+const changeAdoptRequest = require("../api/Dashboard/changeAdoptRequest");
 require("dotenv").config();
 
 const router = express.Router();
@@ -98,6 +100,7 @@ router.get("/users/admin/:email", verifyToken, async (req, res) => {
 router.get("/mypet/:email", mypets);
 router.get("/myCreatedDonationList/:email", myCreatedDonation);
 router.get("/myDonationList/:email", myDonation);
+router.get("/myAdoptionList", myAdoption);
 
 router.post("/adoption", controlAdoption);
 router.post("/mydonation", controlMyDonation);
@@ -115,6 +118,7 @@ router.delete("/users/:id", verifyToken, verifyAdmin, deleteUser);
 router.patch("/users/admin/:id", verifyToken, verifyAdmin, patchUser);
 // my added pet can be changed adopted status
 router.patch("/makeadopt/:id", makeAdopt);
+router.patch("/changeAdoptRequest/:id", changeAdoptRequest);
 // update pet
 router.patch("/updatepet/:id", updatePet);
 // update donation
